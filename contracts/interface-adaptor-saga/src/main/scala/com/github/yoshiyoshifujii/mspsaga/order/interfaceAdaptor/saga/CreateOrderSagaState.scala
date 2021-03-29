@@ -1,4 +1,4 @@
-package com.github.yoshiyoshifujii.mspsaga.order.usecase
+package com.github.yoshiyoshifujii.mspsaga.order.interfaceAdaptor.saga
 
 import com.github.yoshiyoshifujii.mspsaga.order.domain.model.OrderId
 

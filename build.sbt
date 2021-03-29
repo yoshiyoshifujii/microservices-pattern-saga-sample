@@ -27,13 +27,21 @@ lazy val `contract-interface-adaptor-command` = project
   )
   .dependsOn(domain)
 
+lazy val `contract-interface-adaptor-saga` = project
+  .in(file("./contracts/interface-adaptor-saga"))
+  .settings(baseSettings)
+  .settings(
+    name := s"$baseName-contract-interface-adaptor-saga"
+  )
+  .dependsOn(domain)
+
 lazy val orderService = project
   .in(file("./bootstraps/order-service"))
   .settings(baseSettings)
   .settings(
     name := s"$baseName-order-service"
   )
-  .dependsOn(`contract-interface-adaptor-command`)
+  .dependsOn(`contract-interface-adaptor-command`, `contract-interface-adaptor-saga`)
 
 lazy val consumerService = project
   .in(file("./bootstraps/consumer-service"))
@@ -41,7 +49,7 @@ lazy val consumerService = project
   .settings(
     name := s"$baseName-consumer-service"
   )
-  .dependsOn(`contract-interface-adaptor-command`)
+  .dependsOn(`contract-interface-adaptor-command`, `contract-interface-adaptor-saga`)
 
 lazy val kitchenService = project
   .in(file("./bootstraps/kitchen-service"))
@@ -49,7 +57,7 @@ lazy val kitchenService = project
   .settings(
     name := s"$baseName-kitchen-service"
   )
-  .dependsOn(`contract-interface-adaptor-command`)
+  .dependsOn(`contract-interface-adaptor-command`, `contract-interface-adaptor-saga`)
 
 lazy val accountingService = project
   .in(file("./bootstraps/accounting-service"))
@@ -57,7 +65,7 @@ lazy val accountingService = project
   .settings(
     name := s"$baseName-accounting-service"
   )
-  .dependsOn(`contract-interface-adaptor-command`)
+  .dependsOn(`contract-interface-adaptor-command`, `contract-interface-adaptor-saga`)
 
 lazy val root = project
   .in(file("."))
@@ -66,7 +74,9 @@ lazy val root = project
     name := s"$baseName-root"
   )
   .aggregate(
+    domain,
     `contract-interface-adaptor-command`,
+    `contract-interface-adaptor-saga`,
     orderService,
     consumerService,
     kitchenService,
