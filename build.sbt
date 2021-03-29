@@ -12,15 +12,23 @@ lazy val baseSettings = Seq(
   )
 )
 
+lazy val domain = project
+  .in(file("./modules/domain"))
+  .settings(baseSettings)
+  .settings(
+    name := s"$baseName-domain"
+  )
+
 lazy val `contract-interface-adaptor-command` = project
   .in(file("./contracts/interface-adaptor-command"))
   .settings(baseSettings)
   .settings(
     name := s"$baseName-contract-interface-adaptor-command"
   )
+  .dependsOn(domain)
 
 lazy val orderService = project
-  .in(file("./modules/order-service"))
+  .in(file("./bootstraps/order-service"))
   .settings(baseSettings)
   .settings(
     name := s"$baseName-order-service"
@@ -28,7 +36,7 @@ lazy val orderService = project
   .dependsOn(`contract-interface-adaptor-command`)
 
 lazy val consumerService = project
-  .in(file("./modules/consumer-service"))
+  .in(file("./bootstraps/consumer-service"))
   .settings(baseSettings)
   .settings(
     name := s"$baseName-consumer-service"
@@ -36,7 +44,7 @@ lazy val consumerService = project
   .dependsOn(`contract-interface-adaptor-command`)
 
 lazy val kitchenService = project
-  .in(file("./modules/kitchen-service"))
+  .in(file("./bootstraps/kitchen-service"))
   .settings(baseSettings)
   .settings(
     name := s"$baseName-kitchen-service"
@@ -44,7 +52,7 @@ lazy val kitchenService = project
   .dependsOn(`contract-interface-adaptor-command`)
 
 lazy val accountingService = project
-  .in(file("./modules/accounting-service"))
+  .in(file("./bootstraps/accounting-service"))
   .settings(baseSettings)
   .settings(
     name := s"$baseName-accounting-service"
