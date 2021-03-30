@@ -5,10 +5,15 @@ lazy val AkkaVersion = "2.6.13"
 lazy val baseSettings = Seq(
   version := "0.1",
   scalaVersion := "2.13.5",
-  organization := "com.github.yoshiyoshifujii.mspsaga",
+  organization := "com.github.yoshiyoshifujii.mspsaga"
+)
+
+lazy val bootstrapsSettings = Seq(
   libraryDependencies ++= Seq(
     "com.typesafe.akka" %% "akka-actor-typed"         % AkkaVersion,
-    "com.typesafe.akka" %% "akka-actor-testkit-typed" % AkkaVersion % Test
+    "com.typesafe.akka" %% "akka-actor-testkit-typed" % AkkaVersion % Test,
+    "com.typesafe.akka" %% "akka-stream"              % AkkaVersion,
+    "com.typesafe.akka" %% "akka-stream-testkit"      % AkkaVersion % Test
   )
 )
 
@@ -37,7 +42,7 @@ lazy val `contract-interface-adaptor-saga` = project
 
 lazy val orderService = project
   .in(file("./bootstraps/order-service"))
-  .settings(baseSettings)
+  .settings(baseSettings, bootstrapsSettings)
   .settings(
     name := s"$baseName-order-service"
   )
@@ -45,7 +50,7 @@ lazy val orderService = project
 
 lazy val consumerService = project
   .in(file("./bootstraps/consumer-service"))
-  .settings(baseSettings)
+  .settings(baseSettings, bootstrapsSettings)
   .settings(
     name := s"$baseName-consumer-service"
   )
@@ -53,7 +58,7 @@ lazy val consumerService = project
 
 lazy val kitchenService = project
   .in(file("./bootstraps/kitchen-service"))
-  .settings(baseSettings)
+  .settings(baseSettings, bootstrapsSettings)
   .settings(
     name := s"$baseName-kitchen-service"
   )
@@ -61,7 +66,7 @@ lazy val kitchenService = project
 
 lazy val accountingService = project
   .in(file("./bootstraps/accounting-service"))
-  .settings(baseSettings)
+  .settings(baseSettings, bootstrapsSettings)
   .settings(
     name := s"$baseName-accounting-service"
   )
