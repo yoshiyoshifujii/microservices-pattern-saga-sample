@@ -9,7 +9,7 @@ final case class CreateOrder(
     consumerId: ConsumerId,
     restaurantId: RestaurantId,
     deliveryInformation: DeliveryInformation,
-    lineItems: MenuItemIdAndQuantities
+    lineItems: LineItems
 )
 sealed trait CreateOrderResult
 final case class CreateOrderResultSucceeded(orderId: OrderId) extends CreateOrderResult
@@ -21,6 +21,8 @@ class OrderUseCase(
 
   def createOrder: Flow[CreateOrder, CreateOrderResult, NotUsed] =
     Flow[CreateOrder].mapAsync(1) { createOrder =>
+      val orderId = OrderId("newId")
+      val createOrderSagaState = CreateOrderSagaState(orderId)
       ???
     }
 
