@@ -1,10 +1,10 @@
 lazy val baseName = "microservices-pattern-saga-sample"
 
-lazy val AkkaVersion = "2.6.13"
+lazy val AkkaVersion = "2.6.14"
 
 lazy val baseSettings = Seq(
   version := "0.1",
-  scalaVersion := "2.13.5",
+  scalaVersion := "2.13.6",
   organization := "com.github.yoshiyoshifujii.mspsaga"
 )
 
